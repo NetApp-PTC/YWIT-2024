@@ -7,12 +7,17 @@ from machine import Pin, I2C
 import ssd1306
 import time
 
+import sprites
+
 i2c = I2C(-1, scl=Pin(2), sda=Pin(0))
 oled = ssd1306.SSD1306_I2C(128, 64, i2c)
 left_button = Pin(5, Pin.IN)
 right_button = Pin(4, Pin.IN)
 fire_button = Pin(14, Pin.IN)
 missles = []
+enemies = []
+score = 0
+high_score = 0
 
 
 class Missle:
@@ -40,6 +45,27 @@ class Missle:
             oled.pixel(self.x, self.y - y_offset, 1)
 
 
+class Enemy:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+        self.active = True
+        self.sprites =  [sprites.ENEMY_SPRITE1, sprites.ENEMY_SPRITE2]
+        self.current_sprite = 0
+        self.sprite_changed = time.ticks_ms()
+
+    def move(self):
+        pass
+
+    def draw(self):
+        now = time.ticks_ms()
+        if now - self.sprite_changed > 1000:
+            self.current_sprite += 1
+            self.current_sprite %= len(self.sprites)
+            self.sprite_changed = now
+        oled.blit(self.sprites[self.current_sprite], self.x, self.y)
+
+
 class Ship:
     """Keep track of the player's ship"""
 
@@ -64,26 +90,7 @@ class Ship:
     def draw(self):
         """Draw the pixels of our ship"""
 
-        for y_offset in range(1, 12):
-            oled.pixel(self.x, self.y - y_offset, 1)
-        for y_offset in range(2, 9):
-            oled.pixel(self.x + 1, self.y - y_offset, 1)
-            oled.pixel(self.x - 1, self.y - y_offset, 1)
-        for y_offset in range(3, 7):
-            oled.pixel(self.x + 2, self.y - y_offset, 1)
-            oled.pixel(self.x - 2, self.y - y_offset, 1)
-        for y_offset in range(6, 3, -1):
-            inner_offset = y_offset
-            for x_offset in range(3, 10):
-                oled.pixel(self.x - x_offset, self.y - inner_offset, 1)
-                oled.pixel(self.x + x_offset, self.y - inner_offset, 1)
-                inner_offset -= 1
-        for y_offset in range(2, 6):
-            oled.pixel(self.x - 8, self.y - y_offset, 1)
-            oled.pixel(self.x + 8, self.y - y_offset, 1)
-        for y_offset in range(5, 9):
-            oled.pixel(self.x - 5, self.y - y_offset, 1)
-            oled.pixel(self.x + 5, self.y - y_offset, 1)
+        oled.blit(sprites.SHIP_SPRITE, self.x - 8, self.y - 5)
 
     def fire(self):
         """If the fire button is pressed and the cooldown time has
@@ -105,6 +112,19 @@ def update_missles():
         missle.move()
         missle.draw()
 
+def update_enemies():
+    """Remove any destroyed enemies and move the rest"""
+
+    global enemies
+    enemies = [e for e in enemies if e.active]
+    for enemy in enemies:
+        enemy.move()
+        enemy.draw()
+
+def update_score():
+    oled.text("Score:%s" % score, 0, 0)
+    hi_text = "Hi:%s" % max(high_score, score)
+    oled.text(hi_text, 128 - len(hi_text) * 10, 0)
 
 def game_loop(ship):
     """Drive the main game loop"""
@@ -112,12 +132,17 @@ def game_loop(ship):
     oled.fill(0)
     ship.fire()
     update_missles()
+    update_enemies()
     ship.move()
     ship.draw()
+    update_score()
     oled.show()
 
 try:
     ship = Ship(64, 64)
+    for y in range(12, 36, 12):
+        for x in range(10, 118, 16):
+            enemies.append(Enemy(x, y))
     while True:
         game_loop(ship)
 except KeyboardInterrupt:
