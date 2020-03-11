@@ -18,6 +18,7 @@ missles = []
 enemies = []
 score = 0
 high_score = 0
+game_on = True
 
 
 class Missle:
@@ -35,9 +36,22 @@ class Missle:
         cleanup any non-active missles.
         """
 
+        global score, high_score
+
         self.y -= 5
         if self.y < 0:
             self.active = False
+
+        # have we destroyed any enemies?
+        for enemy in enemies:
+            hitbox = enemy.hitbox
+            if not hitbox[0] <= self.x <= hitbox[0] + hitbox[2]:
+                continue
+            if not hitbox[1] <= self.y <= hitbox[1] + hitbox[3]:
+                continue
+            enemy.active = False
+            self.active = False
+            score += 10
 
     def draw(self):
         """Draw ourselves at our current posistion"""
@@ -53,6 +67,10 @@ class Enemy:
         self.sprites =  [sprites.ENEMY_SPRITE1, sprites.ENEMY_SPRITE2]
         self.current_sprite = 0
         self.sprite_changed = time.ticks_ms()
+
+    @property
+    def hitbox(self):
+        return (self.x, self.y, 16, 8)
 
     def move(self):
         pass
@@ -122,9 +140,11 @@ def update_enemies():
         enemy.draw()
 
 def update_score():
+    global game_on
     oled.text("Score:%s" % score, 0, 0)
-    hi_text = "Hi:%s" % max(high_score, score)
-    oled.text(hi_text, 128 - len(hi_text) * 10, 0)
+    if not enemies:
+        oled.text("You Win!", 35, 30)
+        game_on = False
 
 def game_loop(ship):
     """Drive the main game loop"""
@@ -143,7 +163,7 @@ try:
     for y in range(12, 36, 12):
         for x in range(10, 118, 16):
             enemies.append(Enemy(x, y))
-    while True:
+    while game_on:
         game_loop(ship)
 except KeyboardInterrupt:
     pass
