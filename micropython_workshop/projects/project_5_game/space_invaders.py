@@ -11,9 +11,9 @@ import sprites
 
 i2c = I2C(-1, scl=Pin(2), sda=Pin(0))
 oled = ssd1306.SSD1306_I2C(128, 64, i2c)
-left_button = Pin(5, Pin.IN)
-right_button = Pin(4, Pin.IN)
-fire_button = Pin(14, Pin.IN)
+left_button = Pin(14, Pin.IN)  # D5
+right_button = Pin(4, Pin.IN)  # D2
+fire_button = Pin(5, Pin.IN)   # D1
 missles = []
 enemies = []
 score = 0
