@@ -1,0 +1,38 @@
+% Some help here: https://en.wikibooks.org/wiki/LaTeX/Document_Structure
+
+% Preamble
+% ---
+\documentclass{book}
+
+% Packages
+% ---
+\usepackage{graphicx} % Add pictures to your document
+\usepackage{listings} % Source code formatting and highlighting
+
+\begin{document}
+\frontmatter
+
+\title{MicroPython and Microcontrollers}
+\author{NetApp YWIT}
+\date{May 1, 2020}
+\maketitle
+
+\tableofcontents
+
+\input{introduction/introduction.tex}
+
+\mainmatter
+\input{chapter_1/chapter_1.tex}
+\input{chapter_2/chapter_2.tex}
+\input{chapter_3/chapter_3.tex}
+\input{chapter_4/chapter_4.tex}
+\input{chapter_5/chapter_5.tex}
+\input{chapter_6/chapter_6.tex}
+\input{electronics_appendix/electronics_appendix.tex}
+\input{python_appendix/python_appendix.tex}
+
+\appendix
+\input{electronics_appendix/electronics_appendix.tex}
+\input{python_appendix/python_appendix.tex}
+
+\end{document}
