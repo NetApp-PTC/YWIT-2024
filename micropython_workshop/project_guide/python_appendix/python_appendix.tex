@@ -1,12 +1,37 @@
 \chapter{Python Primer}
+If you're new to Python, this section will give you a few things you should know
+in order to better understand the projects in this guide. This is by no means a
+complete or comprehensive look at the Python language. For that, we recommend looking
+at the official Python site and reading through the \href{https://docs.python.org/3/tutorial/}{tutorial}
+there.
+\linebreak
 
-\begin{lstlisting}[language=Python]
-def foo():
-    """This function prints Hello World"""
+\begin{tcolorbox}
+    NOTE: for the projects being used here, we are using an implementation of
+    Python known as \href{https://micropython.org/}{MicroPython}. This is a version
+    of Python that is meant to run on microcontrollers with limited resources. It
+    also has built into it libraries for dealing with hardware devices that are
+    not part of the standard CPython distribution. Therefore, not all Python examples
+    you find online will run on your microcontroller and not all projects for a
+    microcontroller can be run on your computer. But a lot of the code can be shared
+    so the lessons you learn here can apply to other Python projects.
+\end{tcolorbox}
 
-    # do the print
-    print("Hello World")
+Here is a sample of a small Python script. We will disect and explain what each
+section does below:
 
-if __name__ == "__main__":
-    foo()
+\begin{lstlisting}[language=Python,caption=An example Python script]
+def show(message, repeat=1):
+    """This function prints the given message to the console as many
+    times as specified in the repeat parameter.
+    """
+
+    for iteration in range(0, repeat):
+        print(message)
+
+name = input("What is your name: ")
+show(name)
+show(name, repeat=2)
 \end{lstlisting}
+
+On line 1, we are defining a function named show.
