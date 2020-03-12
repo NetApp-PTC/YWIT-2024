@@ -7,13 +7,14 @@ jobs:
       - name: Set up Git repository
         uses: actions/checkout@v1
       - name: Compile LaTeX document
-        uses: xu-cheng/latex-action@master
+        uses: xu-cheng/latex-action@1.2.1
         with:
-          root_file: project_gude.tex
+          root_file: project_guide.tex
           working_directory: micropython_workshop/project_guide
+      - run: cp micropython_workshop/project_guide/project_guide.pdf docs/project_guide.pdf
       - name: Upload PDF to gh-pages
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: .
+          FOLDER: docs
