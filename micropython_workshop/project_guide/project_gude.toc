@@ -1,0 +1,11 @@
+\contentsline {chapter}{Introduction}{v}%
+\contentsline {chapter}{\numberline {1}Project 1: Blink}{1}%
+\contentsline {chapter}{\numberline {2}Project 2: Button}{3}%
+\contentsline {chapter}{\numberline {3}Project 3: LED Party}{5}%
+\contentsline {chapter}{\numberline {4}Project 4: Sensor}{7}%
+\contentsline {chapter}{\numberline {5}Project 5: Game}{9}%
+\contentsline {chapter}{\numberline {6}Project 6: Chat}{11}%
+\contentsline {chapter}{\numberline {7}Electronics Essentials}{13}%
+\contentsline {chapter}{\numberline {8}Python Primer}{15}%
+\contentsline {chapter}{\numberline {A}Electronics Essentials}{17}%
+\contentsline {chapter}{\numberline {B}Python Primer}{19}%
