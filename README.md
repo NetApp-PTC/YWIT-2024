@@ -10,3 +10,5 @@ projects are based on the ESP8266 microcontroller which is running MicroPython a
 they depend on some other electronics components such as LEDs, buttons, and more.
 See the project guide for step by step instructions on each project as well as mini
 tutorials for electronics and programming beginners.
+
+You can view the project guide [here](https://netapp-ptc.github.io/YWIT-2020/project_guide.pdf)

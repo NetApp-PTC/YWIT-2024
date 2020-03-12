@@ -48,11 +48,11 @@ def toggle_led(pin):
 
 
 # set up our Pin where the LED is attached
-led = PWM(Pin(0))
+led = PWM(Pin(14))
 led.duty(0)
 
 # set up the Pin where our button is attached
-button = DebouncedButton(14, toggle_led)
+button = DebouncedButton(5, toggle_led)
 
 print("Try pressing the button to change the brightness of the LED")
 try:
