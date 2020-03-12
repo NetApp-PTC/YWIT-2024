@@ -11,7 +11,7 @@ jobs:
         with:
           root_file: project_guide.tex
           working_directory: micropython_workshop/project_guide
-      - run: cp micropython_workshop/project_guide/project_guide.pdf docs/project_guide.pdf
+      - run: mkdir -p docs && cp micropython_workshop/project_guide/project_guide.pdf docs/project_guide.pdf
       - name: Upload PDF to gh-pages
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:

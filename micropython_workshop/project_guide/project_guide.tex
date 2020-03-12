@@ -2,15 +2,39 @@
 
 % Preamble
 % ---
-\documentclass{book}
+\documentclass{report}
 
 % Packages
 % ---
 \usepackage{graphicx} % Add pictures to your document
 \usepackage{listings} % Source code formatting and highlighting
+\usepackage{xcolor}   % needed to color hyperlinks and source code
+\usepackage{hyperref} % create hyperlinks
+\usepackage[T1]{fontenc} % make sure quotes in Python listings are straight quotes
+
+\hypersetup{
+    colorlinks=true, %set true if you want colored links
+    linktoc=all,     %set to all if you want both sections and subsections linked
+    linkcolor=blue,  %choose some color if you want links to stand out
+}
+
+\lstloadlanguages{Python}
+\lstset{
+  language=Python,
+  numberstyle=\color{gray},
+  stringstyle=\color[HTML]{933797},
+  commentstyle=\color[HTML]{228B22},
+  emph={[2]from,import,pass,return}, emphstyle={[2]\color[HTML]{DD52F0}},
+  emph={[3]range}, emphstyle={[3]\color[HTML]{D17032}},
+  emph={[4]for,in,def}, emphstyle={[4]\color{blue}},
+  showstringspaces=false,
+  breaklines=true,
+  prebreak=\mbox{{\color{gray}\tiny$\searrow$}},
+  numbers=left,
+  xleftmargin=15pt,
+}
 
 \begin{document}
-\frontmatter
 
 \title{MicroPython and Microcontrollers}
 \author{NetApp YWIT}
@@ -21,15 +45,12 @@
 
 \input{introduction/introduction.tex}
 
-\mainmatter
 \input{chapter_1/chapter_1.tex}
 \input{chapter_2/chapter_2.tex}
 \input{chapter_3/chapter_3.tex}
 \input{chapter_4/chapter_4.tex}
 \input{chapter_5/chapter_5.tex}
 \input{chapter_6/chapter_6.tex}
-\input{electronics_appendix/electronics_appendix.tex}
-\input{python_appendix/python_appendix.tex}
 
 \appendix
 \input{electronics_appendix/electronics_appendix.tex}
