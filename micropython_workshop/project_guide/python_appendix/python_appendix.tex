@@ -7,9 +7,9 @@ there.
 \linebreak
 
 \begin{tcolorbox}
-    NOTE: for the projects being used here, we are using an implementation of
-    Python known as \href{https://micropython.org/}{MicroPython}. This is a version
-    of Python that is meant to run on microcontrollers with limited resources. It
+    NOte: for the projects being used here, we are using an implementation of
+    Python known as \href{https://micropython.org/}{MicroPython}. This version
+    is meant to run on microcontrollers with limited resources. It
     also has built into it libraries for dealing with hardware devices that are
     not part of the standard CPython distribution. Therefore, not all Python examples
     you find online will run on your microcontroller and not all projects for a
@@ -22,16 +22,48 @@ section does below:
 
 \begin{lstlisting}[language=Python,caption=An example Python script]
 def show(message, repeat=1):
-    """This function prints the given message to the console as many
-    times as specified in the repeat parameter.
+    """This function prints the given message to the
+    console as smany times as specified in the
+    srepeat parameter.
     """
 
     for iteration in range(0, repeat):
-        print(message)
+        print(iteration, message)
 
 name = input("What is your name: ")
 show(name)
 show(name, repeat=2)
 \end{lstlisting}
 
-On line 1, we are defining a function named show.
+On line 1, we are defining a function named show. This function accepts two parameters,
+message and repeat. The message parameter is required and the repeat parameter
+is optional with a default value of 1.
+
+Lines 2 through 5 comprise the docstring for the function. This information is meant
+for programmers to read and explains what the function does. It does not affect how
+the function works.
+
+Line 7 starts a loop. The loop will repeat the statements in the loop body until
+a condition is met. In this case, it will loop until it has performed the operation
+for each repeat.
+
+Line 8 is the body of the loop. This statement will print the message that the user
+passed in to the console along with the iteration number of the loop.
+
+Line 10 prompts the user for their name and saves the result in a variable called
+name.
+
+Line 11 calls our show function which will print the user's name once (the default).
+
+Line 12 calls our show function again, this time saying that we want to repeat the
+loop of printing the name twice.\newline
+
+Running the program, we will see output like this:
+\begin{verbatim}
+    $ program program.py
+    What is your name: Emily
+    0 Emily
+    0 Emily
+    1 Emily
+    $
+\end{verbatim}
