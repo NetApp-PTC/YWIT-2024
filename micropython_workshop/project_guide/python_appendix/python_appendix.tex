@@ -7,7 +7,7 @@ there.
 \linebreak
 
 \begin{tcolorbox}
-    NOte: for the projects being used here, we are using an implementation of
+    Note: for the projects being used here, we are using an implementation of
     Python known as \href{https://micropython.org/}{MicroPython}. This version
     is meant to run on microcontrollers with limited resources. It
     also has built into it libraries for dealing with hardware devices that are
@@ -32,7 +32,7 @@ def show(message, repeat=1):
 
 name = input("What is your name: ")
 show(name)
-show(name, repeat=2)
+show(name, repeat=3)
 \end{lstlisting}
 
 On line 1, we are defining a function named show. This function accepts two parameters,
@@ -60,10 +60,95 @@ loop of printing the name twice.\newline
 
 Running the program, we will see output like this:
 \begin{verbatim}
-    $ program program.py
-    What is your name: Emily
-    0 Emily
-    0 Emily
-    1 Emily
-    $
+$ python program.py
+What is your name: Emily
+0 Emily
+0 Emily
+1 Emily
+2 Emily
+$
 \end{verbatim}
+
+Another feature that you'll see used often in Python are classes. Classes are a
+convienent way to model something in your program that holds state and implements
+functionality. For example, let's say that we are writing a game about racing go-
+karts. We need to allow each player to have their own kart and keep track of how
+fast it is going, which way they are turning, and allow the kart to speed up and
+slow down. Here is a small class that will help us do that:
+
+\begin{lstlisting}[language=Python,caption=An example of a Python class]
+class Kart:
+    MAXIMUM_SPEED = 100
+
+    def __init__(self):
+        """The kart starts motionless at the beginning"""
+        self._speed = 0
+        self._direction = 0
+        self._acceleration = 0
+
+    def brake(self):
+        """This is called when the user presses the brake button"""
+        self._acceleration = -5
+
+    def accelerate(self):
+        """This is called when the user presses the accelerator button"""
+        self._acceleration = 5
+
+    def steer(self, direction):
+        """This is called when the user presses left or right"""
+        self._direction = direction
+
+    def update(self, ticks):
+        """Update will be called by our game engine and will be
+        provided the number of ticks since it was last called.
+        """
+
+        self._speed += self._acceleration * ticks
+
+        # limit our speed so that we don't go faster than our
+        # kart is allowed to, or slower than 0
+        if self._speed > Kart.MAXIMUM_SPEED:
+            self._speed = Kart.MAXIMUM_SPEED
+        if self._speed < 0:
+            self._speed = 0
+\end{lstlisting}
+
+Looking at this class, there are 5 methods. The first one (on line 4) is a special
+method that is called by the Python interpreter whenever a new Kart is created. It
+will initialize some variables for this particular Kart object.
+
+You may have noticed that the first method takes a parameter called "self". This
+is the first parameter of all methods in a class in Python. It is automatically passed
+by the interpreter and is a reference to the current object. It lets us access the
+variables that belong to the class, like those we defined in the \_\_init\_\_ method.
+
+Speaking of the variables in the \_\_init\_\_ method. Notice how we named them all with
+an underscore? This is a convention in Python that says they are private to our class
+and that code written outside of the class shouldn't access them directly. That means
+that our class should provide ways to modify or read these variables via other methods.
+
+The second method starts on line 10. This is called when the player presses the
+brake button on their controller and will set our Kart's acceleration to a negative
+value so that we start to slow down. It modifies the private \_acceleration member of
+the class.
+
+The third starts on line 14. It is the opposite of braking and will start speeding
+our Kart up when the user presses the accelerator. It aslo modifies the private
+\_acceleration member of the class.
+
+The fourth method, line 18, is again something to deal with user input. This time
+we can see that it takes a second parameter, direction. If the user presses left on
+their controller, then we can expect left to be passed here. The same for right. We
+will modify the private \_direction member here.
+
+Finally, we have a fifth method starting on line 22. This method is called by our
+game engine and uses the class members to determine what happens to the Kart throughout
+the game. That is, it is asking the Kart to update itself at a certain moment in time
+(usually once per frame) so that next time it draws it to the screen, it will be
+in the updated location.
+
+Notice in the last method, we are accessing not only our own variables, \_speed, and
+\_acceleration, but we are also reading a class variable, Kart.MAXIMUM\_SPEED. Unlike
+our member variables, a class variable is the same for all instances of a class. It
+is useful here to keep the game fair so that all Karts have the same limitation on
+their speed.
