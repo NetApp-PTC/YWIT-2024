@@ -1,5 +1,5 @@
-# YWIT-2021
-The NetApp Young Women in Technology conference for 2021
+# YWIT-2023
+The NetApp Young Women in Technology conference for 2023
 
 ## Workshops
 
@@ -11,4 +11,4 @@ they depend on some other electronics components such as LEDs, buttons, and more
 See the project guide for step by step instructions on each project as well as mini
 tutorials for electronics and programming beginners.
 
-You can view the project guide [here](https://netapp-ptc.github.io/YWIT-2021/project_guide.pdf)
+You can view the project guide [here](https://netapp-ptc.github.io/YWIT-2023/project_guide.pdf)
