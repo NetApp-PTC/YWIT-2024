@@ -120,11 +120,16 @@ def tone(pins, note=None, duration=1000, instrument="clarinet"):
 # set up the globals
 tempo = 130
 instrument = "clarinet"
-left_ear = Pin(22, Pin.OUT)
-right_ear = Pin(23, Pin.OUT)
+speaker = Pin(6, Pin.OUT)
 
 # import the song and play each note
 from legend_of_zelda import SONG
-for note in SONG:
-    duration = int(DURATIONS[note[1]] * (60 / tempo))
-    tone([left_ear, right_ear], note[0], duration=duration, instrument=instrument)
+
+try:
+    for note in SONG:
+        duration = int(DURATIONS[note[1]] * (60 / tempo))
+        tone([speaker], note[0], duration=duration, instrument=instrument)
+except Exception:
+    pwms = [PWM(pin) for pin in [speaker]]
+    for pwm in pwms:
+        pwm.deinit()
