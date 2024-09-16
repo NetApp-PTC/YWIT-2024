@@ -59,6 +59,11 @@ _WEATHER_CODES = {
 
 
 def connect_to_wifi():
+    """Attempt to connect to the WiFi network with the credentials set above. This will loop for up
+    to 10 seconds to wait for the connection to finish. If it does not finish successfully within
+    that time, it may be because the password is incorrect or the network is not in range.
+    """
+
     if not NETWORK_NAME or not NETWORK_PASSWORD:
         print("Don't forget to fill in the WiFi details at the top of the script!")
         return False
@@ -86,6 +91,8 @@ def connect_to_wifi():
 
 
 def change_screen_left(pin):
+    """This function is called when the left button is pressed"""
+
     global CURRENT_SCREEN
     CURRENT_SCREEN -= 1
     if CURRENT_SCREEN < 0:
@@ -96,6 +103,8 @@ def change_screen_left(pin):
 
 
 def change_screen_right(pin):
+    """This function is called when the right button is pressed"""
+
     global CURRENT_SCREEN
     CURRENT_SCREEN += 1
     if CURRENT_SCREEN == len(SCREENS_AVAILABLE):
@@ -106,20 +115,31 @@ def change_screen_right(pin):
 
 
 def show_loading():
+    """This is called when we want to draw a loading screen to let the user know that we are in the
+    process of changing to a new screen.
+    """
+
+    title = SCREENS_AVAILABLE[CURRENT_SCREEN]
     OLED.fill(0)
-    OLED.text("Loading...", 15, 25)
+    OLED.text("Loading", 17, 25)
+    OLED.text(f"{title}...", 0, 35)
     OLED.show()
 
 
 def draw_screen():
+    """This function dynamically calls the draw function for the current screen. It relies on the
+    SCREENS_AVAILABLE list matching the name of the function to call.
+    """
+
     locals()[f"draw_{SCREENS_AVAILABLE[CURRENT_SCREEN]}"]()
     OLED.show()
 
 
 def draw_date_and_time():
-    # Use the timeapi.io site to fetch the current time
-    # using the IP address of our microcontroller
-    # https://timeapi.io/swagger/index.html
+    """Use the timeapi.io site to fetch the current time using the IP address of our microcontroller
+
+    API documentation at https://timeapi.io/swagger/index.html
+    """
     response = requests.get(f"https://timeapi.io/api/time/current/ip?ipAddress={IP_ADDRESS}")
     date_time = response.json()
     OLED.fill(0)
@@ -129,15 +149,18 @@ def draw_date_and_time():
 
 
 def draw_weather():
+    """Use the open-meteo.com site to fetch the current weather using the location of our microcontroller
+    in the world (as discovered based on our IP address).
+
+    ipapi.co docs: https://ipapi.com/documentation
+    open-meteo.com docs: https://open-meteo.com/en/docs
+    """
     global LOCATION
     # first get our location based on our IP_ADDRESS if we haven't looked it up before
     if not LOCATION:
         response = requests.get(f"https://ipapi.co/{IP_ADDRESS}/latlong")
         LOCATION = response.text.split(",")
 
-    # Use the open-meteo.com site to fetch the current weather
-    # using the IP address of our microcontroller
-    # https://timeapi.io/swagger/index.html
     weather = requests.get(
         f"https://api.open-meteo.com/v1/forecast?latitude={LOCATION[0]}&" +\
         f"longitude={LOCATION[1]}&current=temperature_2m,relative_humidity_2m,weather_code"
@@ -154,6 +177,12 @@ def draw_weather():
 
 
 def draw_calendar_events():
+    """Use the date.nager.at API to fetch a list of US public holidays for the current month and
+    display them on the screen.
+
+    API docs: https://date.nager.at/Api
+    """
+
     response = requests.get(f"https://timeapi.io/api/time/current/ip?ipAddress={IP_ADDRESS}")
     date_time = response.json()
 
@@ -166,14 +195,24 @@ def draw_calendar_events():
     for holiday in response.json():
         month = int(holiday["date"].split("-")[1])
         if date_time["month"] == month:
-            OLED.text(f"{holiday['date']}: {holiday['name']}", 0, line)
+            OLED.text(f"{holiday['date']}:", 0, line)
+            line += 10
+            OLED.text(f"  {holiday['name']}", 0, line)
             line += 10
 
     if line == 0:
         OLED.text("No holidays", 20, 20)
         OLED.text("this month", 23, 30)
 
+
 def main():
+    """Set up our project by initializing the screen, connecting to WiFi and then determining our
+    public facing IP address which will be needed to talk to the other APIs. We also set up our buttons
+    and then loop forever waiting for inputs to switch screens. Additionally, every 5 seconds we will
+    refresh the current screen that we're on.
+
+    API docs for ipify: https://www.ipify.org/
+    """
     global OLED, IP_ADDRESS
 
     # set up our screen
