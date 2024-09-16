@@ -13,7 +13,7 @@ At the end of this project, your microcontroller should run a MicroPython progra
 temperature and humidity of the room you're sitting in. Let's get started!
 \begin{figure}[H]
 \centering
-    \includegraphics[width=.6\linewidth]{chapter_4/screen_connected.jpg}
+    \includegraphics[width=.6\linewidth]{project_4/screen_connected.jpg}
     \caption{The end result should look something like this}
 \end{figure}
 
@@ -47,20 +47,20 @@ You may need to apply more pressure than expected to seat the microcontroller pr
 
 \subsubsection{Connect the necessary jumper wires}
 \begin{itemize}
-    \item Using a jumper wire, place one end of the wire into hole \textbf{J3} of the breadboard and the other end in
+    \item Place a red jumper wire into hole \textbf{J3} of the breadboard and the other end in
     hole \textbf{D16} of the breadboard. This will provide \textbf{3.3} volts of power to the temperature/humidity sensor.
-    \item Using another jumper wire, place one end of the wire into hole \textbf{J2} of the breadboard and the other
+    \item Place a black jumper wire into hole \textbf{J2} of the breadboard and the other
     end in hole \textbf{D17} of the breadboard. This will provide the ground connection for the temperature/humidity sensor.
-    \item Using a 3rd jumper wire, place one end of the wire into hole \textbf{B6} of the breadboard and the other
+    \item Place a white jumper wire into hole \textbf{B6} of the breadboard and the other
     end in hole \textbf{D18} of the breadboard. This will provide a clock signal to the sensor board.
-    \item Finally, using a 4th jumpre wire, place one end of the wire into hole \textbf{B5} of the breadboard and the other
+    \item Plase a yellow jumper wire into hole \textbf{B5} of the breadboard and the other
     end in hole \textbf{D19} of the breadboard. This will transmit data from the sensor back to the microcontroller.
 \end{itemize}
 
 You should be left with something that looks like this:
 \begin{figure}[H]
     \centering
-    \includegraphics[width=.6\linewidth]{chapter_4/sensor_board_wired.jpg}
+    \includegraphics[width=.6\linewidth]{project_4/sensor_board_wired.jpg}
     \caption{There are 4 wires that will be connected between the microcontroller and the sensor board.}
 \end{figure}
 
@@ -70,7 +70,7 @@ of the board are lined up with the jumper wires and the board points away from t
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=.6\linewidth]{chapter_4/sensor_board_connected.jpg}
+    \includegraphics[width=.6\linewidth]{project_4/sensor_board_connected.jpg}
     \caption{Click the button highlighted in red.}
 \end{figure}
 
@@ -96,14 +96,14 @@ will populate with the list of files installed on the device:
 \begin{figure}[H]
     \centering
     \includegraphics[width=.6\linewidth]{common/viper_connected.png}
-    \caption{Note: update this image with the final file list}
+    \caption{Make sure to open the right file for this project}
 \end{figure}
 
-Click on the file named "chapter\_4a.py". This will load the code in the editor for this section. Read through the comments
+Click on the file named "project\_4a\_sensor.py". This will load the code in the editor for this section. Read through the comments
 and the code to get a sense for how it works. Once you are ready, you can click the blue play button in the upper left of the window to start the script:
 \begin{figure}[H]
     \centering
-    \includegraphics[width=.6\linewidth]{chapter_4/play_chapter_4a.png}
+    \includegraphics[width=.6\linewidth]{project_4/play_project_4a.png}
     \caption{Once started, this script will run forever and output values into the terminal window. You can stop by pressing the red stop button.}
 \end{figure}
 
@@ -114,22 +114,28 @@ But wouldn't it be better if we didn't have to be connected to a computer to see
 \subsubsection{Connect the necessary jumper wires}
 \begin{itemize}
     \item First, disconnect the USB cable from your microcontroller. Doing this prevents accidentally connecting power to somewhere it shouln't go!
-    \item Using a jumper wire, place one end of the wire into hole \textbf{E16} of the breadboard and the other end in
+    \item Place a red jumper wire into hole \textbf{E16} of the breadboard and the other end in
     hole \textbf{E25} of the breadboard. This will provide \textbf{3.3} volts of power to the screen.
-    \item Using another jumper wire, place one end of the wire into hole \textbf{E17} of the breadboard and the other end
+    \item Place a black jumper wire into hole \textbf{E17} of the breadboard and the other end
     in hole \textbf{E24} of the breadboard. This will provide the ground connection for the screen.
-    \item Using a 3rd jumper wire, place one end of the wire into hole \textbf{E18} of the breadboard and the other end
+    \item Place a white jumper wire into hole \textbf{E18} of the breadboard and the other end
     in hole \textbf{E26} of the breadboard. This will provide a clock signal to the screen.
-    \item Finally, using a 4th jumpre wire, place one end of the wire into hole \textbf{B4} of the breadboard and the other
+    \item Place a yellow jumper wire into hole \textbf{B4} of the breadboard and the other
     end in hole \textbf{E27} of the breadboard. This will transmit data from the microcontroller to the screen to be displayed.
 \end{itemize}
 
 You should be left with something that looks like this:
 \begin{figure}[H]
     \centering
-    \includegraphics[width=.6\linewidth]{chapter_4/screen_wired.jpg}
+    \includegraphics[width=.6\linewidth]{project_4/screen_wired.jpg}
     \caption{The first 3 wires are connected right behind the wires for the sensor. The last wire is connected to the microcontroller.}
 \end{figure}
+
+\begin{tcolorbox}[colback=yellow!10!white,colframe=yellow!50!black]
+    NOTE: The black and red jumper wires for the temperature sensor are in the reverse order as the
+    black and red wires for the screen. If you get them backwards, your microcontroller will not be able
+    to power on and it is possible to damage it if you leave it connected for too long.
+\end{tcolorbox}
 
 \subsubsection{Attach the screen to the breadboard}
 Plug the 4 pins of the screen into the breadboard just under where the 4 new jumper wires are lined up. Make sure the pins of
@@ -137,22 +143,25 @@ the screen are lined up with the jumper wires and the screen points away from th
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=.6\linewidth]{chapter_4/screen_connected.jpg}
+    \includegraphics[width=.6\linewidth]{project_4/screen_connected.jpg}
     \caption{Click the button highlighted in red.}
 \end{figure}
 
-Click on the file named "chapter\_4b.py". This will load the code in the editor for this section. Read through the comments and
+Plug the USB cable back into the microcontroller and reconnect to it on the IDE interface.
+Click on the file named "project\_4b\_sensor.py". This will load the code in the editor for this section. Read through the comments and
 the code to get a sense for how it works. Once you are ready, you can click the blue play button in the upper left of the window to start the script:
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=.6\linewidth]{chapter_4/play_chapter_4b.png}
+    \includegraphics[width=.6\linewidth]{project_4/play_project_4b.png}
     \caption{Once started, this script will run forever and output values into the terminal window and to the OLED screen.
     You can stop by pressing the red stop button.}
 \end{figure}
 
 \section{Review}
-% go over what we have accomplished (maybe go into more detail about the circuit and the pins on the microcontroller?
+This project demonstrates how you can connect external sensors to a microcontroller, read their status,
+and output that status to a terminal or display. It also demonstrates how you can import external libraries
+for talking to these peripheral devices.
 
 \section{Possible Extensions}
 If you want to do some experimentation, try these:

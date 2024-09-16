@@ -29,4 +29,3 @@ except KeyboardInterrupt:
     # We're catching the exception if the user sends a ctrl+c
     # signal through the REPL
     pass
-
