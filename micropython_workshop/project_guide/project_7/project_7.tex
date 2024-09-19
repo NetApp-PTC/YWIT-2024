@@ -111,7 +111,7 @@ The speaker should start playing sound. See if you can recognize the tune!
 This project's code shows a few new concepts:
 \begin{itemize}
     \item Configuring a pin on the microcontroller as a PWM device
-    \item Using \textbf{time.sleep_ms()} calls in our code to wait a certain amount of time
+    \item Using \textbf{time.sleep\_ms()} calls in our code to wait a certain amount of time
 \end{itemize}
 
 Let's take each of these and examine them closer
@@ -177,8 +177,8 @@ these are only very rough approximations!
 
 Another important part of music (and some might say the most important part) is resting.
 A rest in music is a period of time when no note is being played. In order to implement
-this in our code, we call the \textbf{time.sleep_ms()} function and then return without
-setting any of the pins to pulse. The \textbf{time.sleep_ms()} tells the microcontroller to
+this in our code, we call the \textbf{time.sleep\_ms()} function and then return without
+setting any of the pins to pulse. The \textbf{time.sleep\_ms()} tells the microcontroller to
 do nothing for the given amount of time before it moves to the next line of code.
 
 \begin{lstlisting}[language=Python,caption=Using the sleep function]
