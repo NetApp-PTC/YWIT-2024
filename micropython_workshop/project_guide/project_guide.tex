@@ -17,6 +17,23 @@
 \usepackage{tcolorbox}
 \usepackage{siunitx} % Allows us to use math symbols (like Omega) in normal paragraphs
 \usepackage{float} % Allows specifying putting an image exactly where it is in the .tex code flow
+\usepackage{pdfpages} % used to include an externally created PDF (like our cover)
+\usepackage{titlesec} % allow formatting of the chapter/section headers
+
+% formatting of chapters shamelessly copied from here: https://tex.stackexchange.com/a/591399
+%%%%%%%%%% chapters
+\titleformat
+{\chapter} % command to format
+[block] % shape: hang, display, block, frame etc
+{\sffamily\bfseries\Large}  % format of label + chapter title
+{\chaptertitlename\ \thechapter:} % label "Chapter 1:"
+{1.5ex} % separation label - chapter title
+{} % code before
+
+\titlespacing{\chapter}
+{0pt} %left of the label + title
+{*0} % vertical space before the title
+{*6.5} % idem after title (in ex units + glue)
 
 \hypersetup{
     colorlinks=true, %set true if you want colored links
@@ -42,14 +59,13 @@
 
 \begin{document}
 
-\title{MicroPython and Microcontrollers}
-\author{NetApp YWIT}
-\date{September 26, 2024}
-\maketitle
+\includepdf{title_page.pdf}
 
 \tableofcontents
 
 \input{introduction/introduction.tex}
+\input{electronics_preamble/electronics_preamble.tex}
+\input{micropython_ide/micropython_ide.tex}
 
 \input{project_1/project_1.tex}
 \input{project_2/project_2.tex}
@@ -60,7 +76,6 @@
 \input{project_7/project_7.tex}
 
 \appendix
-\input{electronics_appendix/electronics_appendix.tex}
 \input{python_appendix/python_appendix.tex}
 
 \end{document}
