@@ -35,10 +35,36 @@
 {*0} % vertical space before the title
 {*6.5} % idem after title (in ex units + glue)
 
+%%%%%%%%%%%%%%  sections
+\titleformat{\section}
+[block] % shape
+{\sffamily\large\bfseries}% format (keep the chapter font family!)
+{\thesection} % label "1.1"
+{0.8ex}% separation label -  section title
+{}
+
+\titlespacing{\section}
+{0pt} %left of label + section title
+{*4} % before the label + section title
+{*1.5} % after
+
+\titleformat{\subsection}
+[block] % shape
+{\sffamily\bfseries}% format (keep the chapter font family!)
+{\thesubsection} % label "1.1.1"
+{0.8ex}% separation label -  section title
+{}
+
+\titlespacing{\subsection}
+{0pt} %left of label + section title
+{*4} % before the label + section title
+{*1.5} % after
+
 \hypersetup{
-    colorlinks=true, %set true if you want colored links
-    linktoc=all,     %set to all if you want both sections and subsections linked
-    linkcolor=blue,  %choose some color if you want links to stand out
+    linktoc=all,              % set to all if you want both sections and subsections linked
+    colorlinks=false,         % hyperlink text will be black
+    linkbordercolor=black,    % hyperlink borders will be black
+    pdfborderstyle={/S/U/W 1} % border style will be underline of width 1pt
 }
 
 \lstloadlanguages{Python}

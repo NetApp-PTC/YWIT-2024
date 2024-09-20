@@ -21,4 +21,4 @@ then set the settings `latex-workshop.docker.enabled: true` and
 `latex-workshop.docker.image.latex: "registry.gitlab.com/islandoftex/images/texlive:latest"`.
 Once you do this and open a .tex file (any of them), there will be a green play button in
 the top right of the editor. The first time it will download the docker image and then build
-it (take a few minutes). Subsequently builds are pretty fast.
+it (takes a few minutes). Subsequent builds are pretty fast.
