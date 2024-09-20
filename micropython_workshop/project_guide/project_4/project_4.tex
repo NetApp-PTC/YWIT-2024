@@ -78,17 +78,18 @@ of the board are lined up with the jumper wires and the board points away from t
 Once all of the wiring is correct, connect the USB cable to the microcontroller and load the IDE to
 access it. Refer back to Chapter \ref{ide} for instructions.
 
-Click on the file named "project\_4a\_sensor.py". This will load the code in the editor for this section. Read through the comments
-and the code to get a sense for how it works. Once you are ready, you can click the blue play button in the upper left of the window to start the script:
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=.6\linewidth]{project_4/play_project_4a.png}
-    \caption{Once started, this script will run forever and output values into the terminal window. You can stop by pressing the red stop button.}
-\end{figure}
+Click on the file named "project\_4a\_sensor.py". This will load the code in the editor for this section.
+Read through the comments and the code to get a sense for how it works. Once you are ready, you can
+click the blue play button in the upper left of the window to start the script.
+
+While the script is running, the temperature and humidity values will be printed out to the IDE's terminal
+every 5 seconds. Stop the program by clicking the red stop button (where the blue play button used to be)
+before moving on to the next step.
 
 \subsection{Making it fancier}
 Having the temperature and humidity print out to the terminal is pretty cool (or pretty warm depending on where you are).
-But wouldn't it be better if we didn't have to be connected to a computer to see the values? We can give our device a screen and have it print the values out there as well.
+But wouldn't it be better if we didn't have to be connected to a computer to see the values? We can give
+our device a screen and have it print the values out there as well.
 
 \subsubsection{Connect the necessary jumper wires}
 \begin{itemize}
@@ -126,16 +127,13 @@ the screen are lined up with the jumper wires and the screen points away from th
     \caption{Click the button highlighted in red.}
 \end{figure}
 
-Plug the USB cable back into the microcontroller and reconnect to it on the IDE interface.
-Click on the file named "project\_4b\_sensor.py". This will load the code in the editor for this section. Read through the comments and
-the code to get a sense for how it works. Once you are ready, you can click the blue play button in the upper left of the window to start the script:
+Plug the USB cable back into the microcontroller and reconnect to it on the IDE interface. Click on the
+file named "project\_4b\_sensor.py". This will load the code in the editor for this section. Read through
+the comments and the code to get a sense for how it works. Once you are ready, you can click the blue play
+button in the upper left of the window to start the script.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=.6\linewidth]{project_4/play_project_4b.png}
-    \caption{Once started, this script will run forever and output values into the terminal window and to the OLED screen.
-    You can stop by pressing the red stop button.}
-\end{figure}
+While the script is running, it will now print out the current temperature and humidity every 5 seconds
+to the IDE's terminal, as before, and it will also display these values to the OLED that we just connected.
 
 \section{Review}
 This project demonstrates how you can connect external sensors to a microcontroller, read their status,

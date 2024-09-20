@@ -11,9 +11,9 @@ import time
 from machine import Pin
 
 # set up the Pin to control our LED. If the LED is wired
-# to a different GPIO pin, then the "0" needs to be changed
+# to a different GPIO pin, then the "20" needs to be changed
 # to whatever is appropriate
-led = Pin(0, Pin.OUT)
+led = Pin(20, Pin.OUT)
 
 try:
     while True:
