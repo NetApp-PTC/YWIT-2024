@@ -20,7 +20,6 @@ between presses.
 """
 
 from machine import Pin, PWM
-import utime
 
 from debounced_button import DebouncedButton
 
@@ -48,11 +47,11 @@ def toggle_led(pin):
 
 
 # set up our Pin where the LED is attached
-led = PWM(Pin(14))
+led = PWM(Pin(20))
 led.duty(0)
 
 # set up the Pin where our button is attached
-button = DebouncedButton(5, toggle_led)
+button = DebouncedButton(8, toggle_led)
 
 print("Try pressing the button to change the brightness of the LED")
 try:
