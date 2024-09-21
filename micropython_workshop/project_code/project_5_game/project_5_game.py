@@ -11,9 +11,9 @@ import space_invaders_sprites
 
 i2c = SoftI2C(scl=Pin(7), sda=Pin(6))
 oled = ssd1306.SSD1306_I2C(128, 64, i2c)
-left_button = Pin(5, mode=Pin.IN, pull=Pin.PULL_DOWN)
-right_button = Pin(4, mode=Pin.IN, pull=Pin.PULL_DOWN)
-fire_button = Pin(3, mode=Pin.IN, pull=Pin.PULL_DOWN)
+left_button = Pin(4, mode=Pin.IN, pull=Pin.PULL_UP)
+right_button = Pin(5, mode=Pin.IN, pull=Pin.PULL_UP)
+fire_button = Pin(3, mode=Pin.IN, pull=Pin.PULL_UP)
 missles = []
 enemies = []
 score = 0
@@ -96,9 +96,9 @@ class Ship:
     def move(self):
         """Move left or right depending on which button is pressed"""
 
-        if left_button.value():
+        if left_button.value() == 0:  # left pressed
             self.x -= 3
-        if right_button.value():
+        if right_button.value() == 0:  # right pressed
             self.x += 3
         if self.x > 119:
             self.x = 119
@@ -116,7 +116,7 @@ class Ship:
         """
 
         now = time.ticks_ms()
-        if fire_button.value() and now - self.last_fired > 200:
+        if fire_button.value() == 0 and now - self.last_fired > 200:
             self.last_fired = now
             missles.append(Missle(self.x, self.y - 10))
 

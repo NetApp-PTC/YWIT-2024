@@ -11,9 +11,9 @@ import utime
 
 class DebouncedButton:
     def __init__(self, pin_num, action):
-        self.pin = Pin(pin_num, mode=Pin.IN, pull=Pin.PULL_DOWN)
+        self.pin = Pin(pin_num, mode=Pin.IN, pull=Pin.PULL_UP)
         self.action = action
-        self.pin.irq(handler=self._action, trigger=Pin.IRQ_RISING)
+        self.pin.irq(handler=self._action, trigger=Pin.IRQ_FALLING)
         self.last_triggered = utime.ticks_ms()
 
     def _action(self, pin):

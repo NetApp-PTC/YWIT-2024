@@ -45,12 +45,17 @@ You may need to apply more pressure than expected to seat the microcontroller pr
 \end{figure}
 
 \subsubsection{Connect the LED, Button, and Resistors}
-Place an LED of your choice (the example image below uses RED) into the breadboard. The longer leg
-should be placed in \textbf{B16} and the shorter leg should be placed in \textbf{B17}. Then place one
-leg of a resistor (doesn't matter which one) in \textbf{A17} and the other in \textbf{A21}. Then place
-the button so that one connected set of pins (refer to \ref{button_basics} for an example) is in \textbf{C28}
-and \textbf{A28} and the other set is in \textbf{C30} and \textbf{A30}. Finally place a resistor between
-\textbf{E30} and the top positive bus (the red one).
+\begin{itemize}
+    \item Place an LED of your choice (the example image below uses RED) into the breadboard. The longer leg
+    should be placed in \textbf{B16} and the shorter leg should be placed in \textbf{B17}.
+    \item Place one leg of a resistor (doesn't matter which one) in \textbf{A17} and the other in
+    \textbf{A21}.
+    \item Place the button so that one connected set of pins (refer to \ref{button_basics} for an
+    example) is in \textbf{C28} and \textbf{A28} and the other set is in \textbf{C30} and \textbf{A30}.
+    \item Place a resistor between \textbf{E28} and \textbf{C21}. This will provide the low signal that
+    the button can switch.
+    \item Finally place a resistor between \textbf{E30} and the top negative bus (the blue one).
+\end{itemize}
 
 You should be left with something that looks like this:
 \begin{figure}[H]
@@ -65,9 +70,7 @@ You should be left with something that looks like this:
     \textbf{E16}. This will provide \textbf{3.3} volts of power to the LED when the program turns it on.
     \item Using a black jumper wire, place one end of the wire into hole \textbf{J2} of the breadboard and the other
     end into \textbf{E21}. This will provide a ground path for the LED through the resistor to complete the circuit.
-    \item Place another red jumper wire into hole \textbf{J3} and the top positive bus (the red one). This will
-    provide power for the button to switch.
-    \item Place a green jumper wire into hole \textbf{J6} and the other end into \textbf{E28}. This
+    \item Place a green jumper wire into hole \textbf{J6} and the other end into \textbf{E30}. This
     will provide the signal to the microcontroller that the button has been pressed.
 \end{itemize}
 

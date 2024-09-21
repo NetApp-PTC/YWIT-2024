@@ -5,7 +5,7 @@ LEDs will display.
 """
 
 from machine import Pin, PWM
-import utime
+import time
 
 from debounced_button import DebouncedButton
 
@@ -18,10 +18,10 @@ def cycle():
 
     for led in leds:
         led.on()
-        utime.sleep_ms(50)
+        time.sleep_ms(50)
     for led in leds:
         led.off()
-        utime.sleep_ms(50)
+        time.sleep_ms(50)
 
 
 def meter():
@@ -32,10 +32,10 @@ def meter():
 
     for led in leds:
         led.on()
-        utime.sleep_ms(50)
+        time.sleep_ms(50)
     for led in reversed(leds):
         led.off()
-        utime.sleep_ms(50)
+        time.sleep_ms(50)
 
 
 def all_blink():
@@ -45,10 +45,10 @@ def all_blink():
 
     for led in leds:
         led.on()
-    utime.sleep_ms(500)
+    time.sleep_ms(500)
     for led in leds:
         led.off()
-    utime.sleep_ms(500)
+    time.sleep_ms(500)
 
 
 def breathe():
@@ -61,11 +61,11 @@ def breathe():
     for duty in range(0, 1001):
         for pwm in pwm_leds:
             pwm.duty(duty)
-        utime.sleep_ms(1)
+        time.sleep_ms(1)
     for duty in range(1000, -1, -1):
         for pwm in pwm_leds:
             pwm.duty(duty)
-        utime.sleep_ms(1)
+        time.sleep_ms(1)
 
 
 def bounce():
@@ -77,12 +77,12 @@ def bounce():
         for led in leds:
             led.off()
         leds[index].on()
-        utime.sleep_ms(100)
+        time.sleep_ms(100)
     for index in reversed(range(0, len(leds))):
         for led in leds:
             led.off()
         leds[index].on()
-        utime.sleep_ms(100)
+        time.sleep_ms(100)
 
 
 def change_mode(pin):
@@ -96,31 +96,33 @@ def change_mode(pin):
     party_mode += 1
     if party_mode >= len(party_modes):
         party_mode = 0
+    print(party_mode)
 
 
 def reset_leds():
     """Initialize all LEDs to off and make sure PWM mode is off"""
+    global leds
+
     for led in leds:
         led.off()
         for led in [PWM(l) for l in leds]:
             led.deinit()
+    red = Pin(2, Pin.OUT)
+    yellow = Pin(3, Pin.OUT)
+    green = Pin(4, Pin.OUT)
+    blue = Pin(5, Pin.OUT)
+    leds = [red, yellow, green, blue]
 
 
 # setup our LEDs
-red = Pin(5, Pin.OUT)
-yellow = Pin(4, Pin.OUT)
-green = Pin(0, Pin.OUT)
-blue = Pin(14, Pin.OUT)
-leds = [red, yellow, green, blue]
+reset_leds()
 
 # set up our button
-button = DebouncedButton(12, change_mode)
+button = DebouncedButton(20, change_mode)
 
 # keep a list of all of the pattern functions we have
 party_modes = [cycle, meter, all_blink, breathe, bounce]
 party_mode = 0
-
-reset_leds()
 
 # now loop forever and call the currenty party function
 try:
@@ -130,4 +132,3 @@ except KeyboardInterrupt:
     # We're catching the exception if the user sends a ctrl+c
     # signal through the REPL
     pass
-

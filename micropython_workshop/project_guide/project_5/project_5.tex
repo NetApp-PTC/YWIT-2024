@@ -44,9 +44,18 @@ You may need to apply more pressure than expected to seat the microcontroller pr
 \end{figure}
 
 \subsubsection{Connect the buttons, resistors, and the screen}
-Place the buttons into the bottom corners of the breadboard. Two on the left, next to each other, and one on the right.
-Then connect a resistor for each button between the top positive bus (the red one) and the top left side of each button.
-Finally, place the OLED screen into the breadboard. Connect it's 4 pins into holes \textbf{A15}, \textbf{A16}, \textbf{A17}, and \textbf{A18}.
+\begin{itemize}
+    \item Place the OLED screen into the breadboard such that its 4 pins connect to holes \textbf{A15}, \textbf{A16}, \textbf{A17}, and \textbf{A18}.
+    \item Place a button so that one connected set of pins (refer to \ref{button_basics} for an example) is in \textbf{A1}
+    and \textbf{C1} and the other set is in \textbf{A3} and \textbf{C3}.
+    \item Place a resistor between \textbf{E1} and the top negative bus (the blue one).
+    \item Place another button so that one connected set of pins is in \textbf{A4} and \textbf{C4}
+    and the other set is in \textbf{A6} and \textbf{C6}.
+    \item Place a resistor between \textbf{E4} and the top negative bus.
+    \item Place a third button so that one connected set of pins is in \textbf{A28} and \textbf{C28}
+    and the other set is in \textbf{A30} and \textbf{C30}.
+    \item Finally place a resistor between \textbf{E28} and the top negative bus.
+\end{itemize}
 
 You should be left with something that looks like this:
 \begin{figure}[H]
@@ -57,17 +66,17 @@ You should be left with something that looks like this:
 
 \subsubsection{Connect the necessary jumper wires}
 \begin{itemize}
-    \item Place one end of a red jumper wire into hole \textbf{I22} of the breadboard and the other end into
-    any hole on the top positive bus (the red one). This will provide \textbf{3.3} volts of power to all of the components.
     \item Using a black jumper wire, place one end of the wire into hole \textbf{I21} of the breadboard and the other
     end in any hole on the top negative bus (the blue one). This will provide the ground connection for all of the components.
     \item Place one end of a black jumper wire between the top negative bus and hole \textbf{B15}. This will provide the ground connection
     for the OLED screen.
+    \item Place one end of a red jumper wire into hole \textbf{I22} of the breadboard and the other end into
+    \textbf{B16}. This will provide \textbf{3.3} volts of power to the OLED screen.
     \item Place a red jumper wire between the top positive bus and hole \textbf{B16}. This will provide power for the OLED screen.
     \item Place a white jumper wire between \textbf{B17} and \textbf{B25}. This will provide a clock signal to the OLED screen.
     \item Place a yellow jumper wire between \textbf{B18} and \textbf{B24}. This will provide the data to display on the OLED screen.
-    \item Place a green jumper wire between \textbf{E3} and \textbf{B23}. This will provide the signal for the left movement.
-    \item Place a green jumper wire between \textbf{E6} and \textbf{B22}. This will provide the signal for the right movement.
+    \item Place a green jumper wire between \textbf{E3} and \textbf{B22}. This will provide the signal for the left movement.
+    \item Place a green jumper wire between \textbf{E6} and \textbf{B23}. This will provide the signal for the right movement.
     \item Finally, place a purple jumper wire between \textbf{E30} and \textbf{B21}. This will provide the fire signal.
 \end{itemize}
 
@@ -215,9 +224,9 @@ def __init__(self, x, y):
 def move(self):
     """Move left or right depending on which button is pressed"""
 
-    if left_button.value():
+    if left_button.value() == 0:  # left pressed
         self.x -= 3
-    if right_button.value():
+    if right_button.value() == 0:  # right pressed
         self.x += 3
     if self.x > 119:
         self.x = 119
@@ -235,7 +244,7 @@ def fire(self):
     """
 
     now = time.ticks_ms()
-    if fire_button.value() and now - self.last_fired > 200:
+    if fire_button.value() == 0 and now - self.last_fired > 200:
         self.last_fired = now
         missles.append(Missle(self.x, self.y - 10))
 \end{lstlisting}
@@ -251,7 +260,7 @@ edges of the screen, it doesn't move it any further.
 
 In the \textbf{draw()} method, we use the \textbf{blit()} method mentioned previously to draw our ship's sprite to the OLED.
 
-In the \textbf{fire()} method, we chekc if the fire button is currently held down. If so, it creates a new
+In the \textbf{fire()} method, we check if the fire button is currently held down. If so, it creates a new
 instance of the \textbf{Missle} class and sets it's initial position to be just above the ship's current position.
 
 \subsubsection{The game loop and helper function}

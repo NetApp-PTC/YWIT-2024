@@ -38,12 +38,12 @@ def toggle_led(pin):
     """
 
     global brightness
-    new_duty = brightness_list[brightness]
-    led.duty(new_duty)
-    print("LED brightness now at %.0f%%" % (new_duty / 1000 * 100))
     brightness += 1
     if brightness >= len(brightness_list):
         brightness = 0
+    new_duty = brightness_list[brightness]
+    led.duty(new_duty)
+    print("LED brightness now at %.0f%%" % (new_duty / 1000 * 100))
 
 
 # set up our Pin where the LED is attached
