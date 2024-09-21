@@ -22,3 +22,9 @@ then set the settings `latex-workshop.docker.enabled: true` and
 Once you do this and open a .tex file (any of them), there will be a green play button in
 the top right of the editor. The first time it will download the docker image and then build
 it (takes a few minutes). Subsequent builds are pretty fast.
+
+#### Flashing the Microcontroller Image
+If you want to flash a microcontroller with the exact version of all of the software that was used
+here, you can use [esptool](https://docs.espressif.com/projects/esptool/en/latest/esp32c3/esptool/index.html)
+to do so. Just connect your microcontroller and run `esptool.py --chip esp32c3 --port <port> write_flash 0 micropython_workshop/microcontroller_image.bin`.
+Make sure you fill in `<port>` with the relevant port your computer assigns it.
