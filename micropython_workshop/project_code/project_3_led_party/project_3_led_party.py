@@ -9,6 +9,7 @@ import time
 
 from debounced_button import DebouncedButton
 
+leds = []
 
 def cycle():
     """This pattern will turn all of the LEDS from
